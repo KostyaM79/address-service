@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AddressService.Common;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,16 +9,8 @@ using System.Threading.Tasks;
 namespace AddressService.DataLayer
 {
     [Index("StreetId", "HouseNumber", IsUnique = true, Name = "IX_HouseNumbers")]
-    public class HouseNumberEntity
+    public class HouseNumberEntity : HouseNumberModelBase
     {
-        public int Id { get; set; }
-
-        [Required]
-        public int StreetId { get; set; }
-
-        [Required, MaxLength(5)]
-        public string HouseNumber { get; set; }
-
         public StreetEntity Street { get; set; }
 
         public ICollection<BuildingNumberEntity> BuildingNumbers { get; set; }

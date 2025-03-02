@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AddressService.Common;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,19 +9,8 @@ using System.Threading.Tasks;
 namespace AddressService.DataLayer
 {
     [Index("TownId", "StreetName", "StreetTypeId", IsUnique = true, Name = "IX_Streets")]
-    public class StreetEntity
+    public class StreetEntity : StreetModelBase
     {
-        public int Id { get; set; }
-
-        [Required]
-        public int TownId { get; set; }
-
-        [Required, MaxLength(25)]
-        public string StreetName { get; set; }
-
-        [Required]
-        public int StreetTypeId { get; set; }
-
         public TownEntity Town { get; set; }
 
         public StreetTypeEntity StreetType { get; set; }

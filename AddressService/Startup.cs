@@ -1,4 +1,5 @@
 using AddressService.DataLayer;
+using AddressService.ServiceLayer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,14 @@ namespace AddressService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("connStr")));
+            services.AddScoped<ICountryService, CountriesService>();
+            services.AddScoped<IRegionService, RegionsService>();
+            services.AddScoped<IDistrictService, DistrictService>();
+            services.AddScoped<ITownService, TownService>();
+            services.AddScoped<IStreetService, StreetService>();
+            services.AddScoped<IHouseNumberService, HouseNumberService>();
+            services.AddScoped<IBuildingNumberService, BuildingNumberService>();
+            services.AddScoped<IApartamentNumberService, ApartamentNumberService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
