@@ -234,29 +234,40 @@ namespace AddressService.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApartamentNumbers_BuildingNumberId",
+                name: "IX_ApartamentNumbers",
                 table: "ApartamentNumbers",
-                column: "BuildingNumberId");
+                columns: new[] { "BuildingNumberId", "ApartamentNumber" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_BuildingNumbers_HouseNumberId",
+                name: "IX_BuildingNumbers",
                 table: "BuildingNumbers",
-                column: "HouseNumberId");
+                column: "HouseNumberId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Districts_RegionId",
+                name: "IX_Countries",
+                table: "Countries",
+                column: "CountryName",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Districts",
                 table: "Districts",
-                column: "RegionId");
+                columns: new[] { "RegionId", "DistrictName" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_HouseNumbers_StreetId",
+                name: "IX_HouseNumbers",
                 table: "HouseNumbers",
-                column: "StreetId");
+                columns: new[] { "StreetId", "HouseNumber" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Regions_CountryId",
+                name: "IX_Regions",
                 table: "Regions",
-                column: "CountryId");
+                columns: new[] { "CountryId", "RegionName", "RegionStatusId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Regions_RegionStatusId",
@@ -264,24 +275,44 @@ namespace AddressService.Migrations
                 column: "RegionStatusId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RegionStatuses",
+                table: "RegionStatuses",
+                column: "RegionStatusName",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Streets",
+                table: "Streets",
+                columns: new[] { "TownId", "StreetName", "StreetTypeId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Streets_StreetTypeId",
                 table: "Streets",
                 column: "StreetTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Streets_TownId",
-                table: "Streets",
-                column: "TownId");
+                name: "IX_StreetTypes",
+                table: "StreetTypes",
+                column: "StreetTypeName",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Towns_DistrictId",
+                name: "IX_Towns",
                 table: "Towns",
-                column: "DistrictId");
+                columns: new[] { "DistrictId", "TownName", "TownStatusId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Towns_TownStatusId",
                 table: "Towns",
                 column: "TownStatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TownStatuses",
+                table: "TownStatuses",
+                column: "TownStatusName",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TownStatuses_DistrictEntityId",

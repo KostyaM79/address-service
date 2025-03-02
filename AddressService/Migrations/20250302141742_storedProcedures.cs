@@ -116,6 +116,8 @@ namespace AddressService.Migrations
             migrationBuilder.Sql("DROP PROCEDURE AddTownProc");
             migrationBuilder.Sql("DROP PROCEDURE AddStreetProc");
             migrationBuilder.Sql("DROP PROCEDURE AddHouseNumberProc");
+            migrationBuilder.Sql("DROP PROCEDURE AddBuildingNumberProc");
+            migrationBuilder.Sql("DROP PROCEDURE AddApartamentNumberProc");
         }
     }
 }

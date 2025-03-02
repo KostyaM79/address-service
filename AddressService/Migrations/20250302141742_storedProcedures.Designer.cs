@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AddressService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250301161236_initial")]
-    partial class initial
+    [Migration("20250302141742_storedProcedures")]
+    partial class storedProcedures
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,7 +38,8 @@ namespace AddressService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BuildingNumberId");
+                    b.HasIndex(new[] { "BuildingNumberId", "ApartamentNumber" }, "IX_ApartamentNumbers")
+                        .IsUnique();
 
                     b.ToTable("ApartamentNumbers");
                 });
@@ -60,7 +61,8 @@ namespace AddressService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HouseNumberId");
+                    b.HasIndex(new[] { "HouseNumberId" }, "IX_BuildingNumbers")
+                        .IsUnique();
 
                     b.ToTable("BuildingNumbers");
                 });
@@ -78,6 +80,9 @@ namespace AddressService.Migrations
                         .HasColumnType("nvarchar(25)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex(new[] { "CountryName" }, "IX_Countries")
+                        .IsUnique();
 
                     b.ToTable("Countries");
                 });
@@ -99,7 +104,8 @@ namespace AddressService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RegionId");
+                    b.HasIndex(new[] { "RegionId", "DistrictName" }, "IX_Districts")
+                        .IsUnique();
 
                     b.ToTable("Districts");
                 });
@@ -121,7 +127,8 @@ namespace AddressService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StreetId");
+                    b.HasIndex(new[] { "StreetId", "HouseNumber" }, "IX_HouseNumbers")
+                        .IsUnique();
 
                     b.ToTable("HouseNumbers");
                 });
@@ -146,9 +153,10 @@ namespace AddressService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CountryId");
-
                     b.HasIndex("RegionStatusId");
+
+                    b.HasIndex(new[] { "CountryId", "RegionName", "RegionStatusId" }, "IX_Regions")
+                        .IsUnique();
 
                     b.ToTable("Regions");
                 });
@@ -166,6 +174,9 @@ namespace AddressService.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex(new[] { "RegionStatusName" }, "IX_RegionStatuses")
+                        .IsUnique();
 
                     b.ToTable("RegionStatuses");
                 });
@@ -192,7 +203,8 @@ namespace AddressService.Migrations
 
                     b.HasIndex("StreetTypeId");
 
-                    b.HasIndex("TownId");
+                    b.HasIndex(new[] { "TownId", "StreetName", "StreetTypeId" }, "IX_Streets")
+                        .IsUnique();
 
                     b.ToTable("Streets");
                 });
@@ -210,6 +222,9 @@ namespace AddressService.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex(new[] { "StreetTypeName" }, "IX_StreetTypes")
+                        .IsUnique();
 
                     b.ToTable("StreetTypes");
                 });
@@ -234,9 +249,10 @@ namespace AddressService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DistrictId");
-
                     b.HasIndex("TownStatusId");
+
+                    b.HasIndex(new[] { "DistrictId", "TownName", "TownStatusId" }, "IX_Towns")
+                        .IsUnique();
 
                     b.ToTable("Towns");
                 });
@@ -264,6 +280,9 @@ namespace AddressService.Migrations
                     b.HasIndex("DistrictEntityId");
 
                     b.HasIndex("TownStatusEntityId");
+
+                    b.HasIndex(new[] { "TownStatusName" }, "IX_TownStatuses")
+                        .IsUnique();
 
                     b.ToTable("TownStatuses");
                 });
