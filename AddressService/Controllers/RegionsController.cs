@@ -25,5 +25,11 @@ namespace AddressService.Controllers
         {
             return model.AddNewRegion(service);
         }
+
+        [HttpGet, Route(nameof(FindByCountryId))]
+        public RegionModel[] FindByCountryId(int countryId)
+        {
+            return service.FindByCountryId(countryId);
+        }
     }
 }

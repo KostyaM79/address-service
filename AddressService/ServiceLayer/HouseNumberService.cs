@@ -1,4 +1,5 @@
 ﻿using AddressService.DataLayer;
+using AddressService.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,6 +26,17 @@ namespace AddressService.ServiceLayer
             SqlParameter outParam = new SqlParameter("@id", SqlDbType.Int, 0, ParameterDirection.Output, false, 0, 0, null, DataRowVersion.Current, null);
             context.Database.ExecuteSqlRaw("AddHouseNumberProc @streetId, @houseNumber, @id out", param_streetId, param_houseNumber, outParam);
             return (int)outParam.Value;
+        }
+
+        public HouseNumberModel[] FindByStreetId(int streetId)
+        {
+            return context.HouseNumbers.AsNoTracking().Where(e => e.StreetId == streetId)
+                .Select(e => new HouseNumberModel()
+                {
+                    Id = e.Id,
+                    StreetId = e.StreetId,
+                    HouseNumber = e.HouseNumber
+                }).ToArray();
         }
     }
 }

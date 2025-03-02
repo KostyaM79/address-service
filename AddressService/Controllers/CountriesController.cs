@@ -25,5 +25,11 @@ namespace AddressService.Controllers
         {
             return model.AddNewCountry(service);
         }
+
+        [HttpGet, Route(nameof(GetAll))]
+        public CountryModel[] GetAll()
+        {
+            return service.GetAll();
+        }
     }
 }

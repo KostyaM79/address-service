@@ -25,5 +25,11 @@ namespace AddressService.Controllers
         {
             return model.AddNewHouseNumber(service);
         }
+
+        [HttpGet, Route(nameof(FindByStreetId))]
+        public HouseNumberModel[] FindByStreetId(int streetId)
+        {
+            return service.FindByStreetId(streetId);
+        }
     }
 }

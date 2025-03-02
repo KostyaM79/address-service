@@ -25,5 +25,11 @@ namespace AddressService.Controllers
         {
             return model.AddNewApartamentNumber(service);
         }
+
+        [HttpGet, Route(nameof(FindByBuildingNumberId))]
+        public ApartamentNumberModel[] FindByBuildingNumberId(int buildingNumberId)
+        {
+            return service.FindByBuildingNumberId(buildingNumberId);
+        }
     }
 }

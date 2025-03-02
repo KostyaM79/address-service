@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using System.Data;
 using AddressService.DataLayer;
+using AddressService.Models;
 
 namespace AddressService.ServiceLayer
 {
@@ -25,6 +26,11 @@ namespace AddressService.ServiceLayer
             SqlParameter outParam = new SqlParameter("@id", SqlDbType.Int, 0, ParameterDirection.Output, false, 0, 0, null, DataRowVersion.Current, null);
             context.Database.ExecuteSqlRaw("AddCountryProc @countryName, @id out", param1, outParam);
             return (int)outParam.Value;
+        }
+
+        public CountryModel[] GetAll()
+        {
+            return context.Countries.AsNoTracking().Select(e => new CountryModel() { Id = e.Id, CountryName = e.CountryName }).ToArray();
         }
     }
 }

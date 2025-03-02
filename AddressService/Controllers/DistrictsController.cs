@@ -25,5 +25,17 @@ namespace AddressService.Controllers
         {
             return model.AddNewDistrict(service);
         }
+
+        /// <summary>
+        /// Возвращает массив районов конкретного региона.
+        /// Пример вызова: <baseURL>/api/Districts/FindByRegionId?regionId=2
+        /// </summary>
+        /// <param name="regionId">Id региона</param>
+        /// <returns>Массив районов: DistrictModel[]</returns>
+        [HttpGet, Route(nameof(FindByRegionId))]
+        public DistrictModel[] FindByRegionId(int regionId)
+        {
+            return service.FindByRegionId(regionId);
+        }
     }
 }

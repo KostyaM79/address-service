@@ -25,5 +25,11 @@ namespace AddressService.Controllers
         {
             return model.AddNewTown(service);
         }
+
+        [HttpGet, Route(nameof(FindByDistrictId))]
+        public TownModel[] FindByDistrictId(int districtId)
+        {
+            return service.FindByDistrictId(districtId);
+        }
     }
 }
